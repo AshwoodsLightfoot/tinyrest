@@ -19,7 +19,7 @@ class ApiConfig
     $this->config['nameSpace'] = $userResourceNamespace;
     $nameSpaceArr = explode('\\', $userResourceNamespace);
     if (empty($userResourceNamespace) || empty($nameSpaceArr[0])) {
-      throw new ApiException("User resource namespace is empty. Please add to ApiConfig namespace to your resources. Example: '\\App\\resources'.");
+      throw new ApiException("User resource namespace is empty. Please, add to ApiConfig a namespace for your resources. Example: 'MyApp\\resources'.");
     }
     $userNameSpaceRoot = $nameSpaceArr[0] . '\\';
     $rnLen = strlen($userResourceNamespace);
