@@ -15,13 +15,6 @@ class ApiResponse {
     'success' => 0,
   ]; // array for response
 
-  protected function isDebugMode()
-  {
-    $result = 0;
-
-    return $result;
-  }
-
   public function getJSON()
   {
     return json_encode($this->resultArray);
@@ -61,25 +54,6 @@ class ApiResponse {
     }
   }
 
-  public function setDebugError($text, \Exception $e)
-  {
-    if ($this->isDebugMode()) {
-      $text = $e->getMessage();
-      $this->setCode($e->getCode());
-    }
-    $this->setError($text);
-  }
-
-  public function addDebugValue($value)
-  {
-    if ($this->isDebugMode()) {
-      if (!isset($this->resultArray['debug'])) {
-        $this->resultArray['debug'] = [];
-      }
-      $this->resultArray['debug'][] = $value;
-    }
-  }
-
   /**
    * Break script and send http error code to user. Status will be used as text
    * @param int $code
@@ -94,11 +68,5 @@ class ApiResponse {
   {
     $this->resultArray = $array;
   }
-
-  public function needReload()
-  {
-    $this->resultArray['needReload'] = 1;
-  }
-
 
 }
