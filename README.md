@@ -17,7 +17,7 @@ Simply add `ashwoodslightfoot/tiny-rest-router` to your composer.json file.
 
     {
         "require": {
-            "nategood/httpful": "*"
+            "ashwoodslightfoot/tiny-rest-router": "*"
         }
     }
 
