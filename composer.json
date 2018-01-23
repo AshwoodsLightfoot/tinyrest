@@ -2,7 +2,7 @@
     "name": "ashwoodslightfoot/tiny-rest-router",
     "description": "Tiny RESTful router",
     "type": "library",
-    "license": "MIT License",
+    "license": "MIT",
     "authors": [
         {
             "name": "Valerii Tsarov",
