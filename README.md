@@ -22,7 +22,7 @@ Simply add `ashwoodslightfoot/tiny-rest-router` to your composer.json file.
     }
 
 or use a console command:
-`composer require "ashwoodslightfoot/tiny-rest-router:*"`
+`composer require "ashwoodslightfoot/tiny-rest-router:*"` in your site root folder.
 
 # How to configure http server
 
@@ -52,6 +52,7 @@ Add this part to your site configuration file.
 # How to use
 
 See a simple example `YourSiteFolder/vendor/ashwoodslightfoot/tiny-rest-router/examples/rest/index.php`
+
 See a class hierarchy `YourSiteFolder/vendor/ashwoodslightfoot/tiny-rest-router/examples/resources/v1`. 
 The folder contains classes for RESTful API v1.
 
