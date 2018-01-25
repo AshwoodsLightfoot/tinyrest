@@ -15,7 +15,8 @@ class ApiConfig
    * @param $userResourceNamespace
    * @throws ApiException
    */
-  public function __construct($userResourceNamespace) {
+  public function __construct($userResourceNamespace)
+  {
     $this->config['nameSpace'] = $userResourceNamespace;
     $nameSpaceArr = explode('\\', $userResourceNamespace);
     if (empty($userResourceNamespace) || empty($nameSpaceArr[0])) {
@@ -33,7 +34,7 @@ class ApiConfig
       if (false !== strpos($class, 'ComposerAutoloaderInit')) {
         $loader = $class::getLoader();
         $prefixes = $loader->getPrefixesPsr4();
-        foreach ($prefixes as $prefix=>$path) {
+        foreach ($prefixes as $prefix => $path) {
           if (false !== strpos($prefix, $userNameSpaceRoot)) {
             $arr = $nameSpaceArr;
             unset($arr[0]);
