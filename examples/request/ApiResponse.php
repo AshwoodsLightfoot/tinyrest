@@ -20,12 +20,13 @@ class ApiResponse {
     return json_encode($this->resultArray);
   }
 
-	public function operationSuccess() {
+  public function operationSuccess()
+  {
     $this->resultArray['code'] = 0;
     $this->resultArray['error'] = '';
     $this->resultArray['success'] = 1;
     $this->setStatus();
-	}
+  }
 
   public function setCode($text)
   {
