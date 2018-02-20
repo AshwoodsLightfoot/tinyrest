@@ -84,7 +84,13 @@ class ApiConfig
     $data = [];
     if ($input && ($tmpArr = explode("&", $input))) {
       foreach ($tmpArr as $pair) {
+        if (!trim($pair)) {
+          continue;
+        }
         $tmp = explode("=", $pair);
+        if (empty($tmp[1])) {
+          $tmp[1] = '';
+        }
         $data[urldecode($tmp[0])] = urldecode($tmp[1]);
       }
     }
