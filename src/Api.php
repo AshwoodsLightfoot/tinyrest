@@ -228,6 +228,8 @@ class Api {
       if (empty($qp[$name])) {
         if ($notEmpty) {
           $error = true;
+        } else {
+          $result = $this->oValidator->check($qp[$name], $type);
         }
       } else {
         $result = $this->oValidator->check($qp[$name], $type);

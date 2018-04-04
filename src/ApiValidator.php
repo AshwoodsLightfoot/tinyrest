@@ -39,9 +39,6 @@ class ApiValidator
           }
           break;
       }
-      if (empty($value)) {
-        $value = null;
-      }
     }
 
     return $value;
