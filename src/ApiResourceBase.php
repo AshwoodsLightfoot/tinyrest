@@ -89,6 +89,13 @@ abstract class ApiResourceBase
     $failText = "Undefined or empty parameter. Required params: ";
     foreach ($this->params as $param => $value) {
       $this->paramValues[$param] = null;
+      if (!empty($value['require']) && is_array($value['require'])) {
+        //Check specific requirements (especially for methods)
+        if (!in_array($this->oApi->getMethod(), $value['require'])) {
+          unset($this->paramValues[$param]);
+          continue;
+        }
+      }
       if (!empty($value['session'])) {
         if (isset($_SESSION[$value['session']])) {
           $this->paramValues[$param] = $_SESSION[$value['session']];
@@ -102,7 +109,16 @@ abstract class ApiResourceBase
       ) {
         $fail = true;
       }
-      $failText .= "{$param}={$value['type']}";
+      if (!empty($value['require'])) {
+        $failText .= "{$param}={$value['type']} ";
+      }
+      if (!empty($value['convert'])) {
+        switch ($value['convert']) {
+          case ApiValidator::CONVERT_DATETIMESTRING:
+            $this->paramValues[$param] = date("Y-m-d H:i:s", $this->paramValues[$param]);
+            break;
+        }
+      }
     }
 
     if ($fail) {

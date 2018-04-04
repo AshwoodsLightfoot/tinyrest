@@ -129,7 +129,7 @@ class Api {
     if (empty($this->pathSegments[self::TRACKING_API_RESOURCE_SEGMENT])) {
       $errorCode = 400;
     } else {
-      $this->resource = strtolower($this->pathSegments[self::TRACKING_API_RESOURCE_SEGMENT]);
+      $this->resource = str_replace("-", "", strtolower($this->pathSegments[self::TRACKING_API_RESOURCE_SEGMENT]));
       $className = $this->classNameByNameSpace([$this->version, $this->classGroup, ucfirst($this->resource)]);
       $className = $this->oConfig->getNameSpace().$className;
       if (!class_exists($className)) {
