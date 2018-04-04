@@ -8,6 +8,7 @@ class ApiValidator
         , PARAM_TYPE_STRING = 'string'
         , PARAM_TYPE_ARRAY = 'array' //1, 2, 3
         , PARAM_ARRAY_SEPARATOR = ','
+        , CONVERT_DATETIMESTRING = 'DateTimeString'
   ;
 
   public function __construct() {

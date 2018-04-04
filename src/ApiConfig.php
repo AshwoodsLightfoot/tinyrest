@@ -88,8 +88,8 @@ class ApiConfig
           continue;
         }
         $tmp = explode("=", $pair);
-        if (empty($tmp[1])) {
-          $tmp[1] = '';
+        if (empty($tmp[0])) {
+          continue;
         }
         $data[urldecode($tmp[0])] = urldecode($tmp[1]);
       }

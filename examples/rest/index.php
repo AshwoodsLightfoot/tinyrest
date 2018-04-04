@@ -3,6 +3,10 @@
 $loader = require __DIR__ . '/../../vendor/autoload.php';
 $loader->addPsr4('App\\', __DIR__ . "/../../examples");
 
+//Add test data to PHP session
+session_start();
+$_SESSION['user_levels'] = [1, 5, 8];
+
 $resultArray = [];
 $oResponse = new App\request\ApiResponse();
 
@@ -10,6 +14,7 @@ try {
 
   $oConfig = new \TinyRest\ApiConfig('App\\resources');
   $oApi = new \TinyRest\Api($oConfig);
+
   //Get resource by URI. Api will check version/classGroup/resource/method
   $oResource = $oApi->getResourceObject();
 
