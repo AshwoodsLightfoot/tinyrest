@@ -106,6 +106,16 @@ class ApiConfig
       return $data;
     }
 
+    //Check content type application/json
+    try {
+      $json = json_decode($input, true);
+      if (is_array($json)) {
+        return $json;
+      }
+    } catch (\Exception $e) {
+      
+    }
+    
     //form-data
     if (strpos($input, 'Content-Disposition: form-data')) {
       $arr = explode('----', $input);
