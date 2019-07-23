@@ -78,6 +78,7 @@ abstract class ApiResourceBase
    */
   public function callMethod($method)
   {
+    $this->getParams($this); // Needed for Tracking events.
     $this->fillRequiredParams();
 
     return call_user_func([$this, $method]);
