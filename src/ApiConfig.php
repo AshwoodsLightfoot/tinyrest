@@ -15,9 +15,10 @@ class ApiConfig
    * @param $userResourceNamespace
    * @throws ApiException
    */
-  public function __construct($userResourceNamespace)
+  public function __construct($userResourceNamespace, $sessionInterface = null)
   {
     $this->config['nameSpace'] = $userResourceNamespace;
+    $this->config['sessionInterface'] = $sessionInterface;
     $nameSpaceArr = explode('\\', $userResourceNamespace);
     if (empty($userResourceNamespace) || empty($nameSpaceArr[0])) {
       throw new ApiException("User resource namespace is empty. Please, add to ApiConfig a namespace for your resources. Example: 'MyApp\\resources'.");
@@ -167,4 +168,8 @@ class ApiConfig
     return $this->config['queryParams'];
   }
 
+  public function getSessionInterface()
+  {
+    return $this->config['sessionInterface'];
+  }
 }
