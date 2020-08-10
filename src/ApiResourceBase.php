@@ -28,9 +28,20 @@ abstract class ApiResourceBase
   */
   protected $paramValues = []; //Array for values of params
 
-  public function __construct(Api $oApi)
+  /**
+   * @var null
+   */
+  protected $sessionInterface;
+
+  /**
+   * ApiResourceBase constructor.
+   * @param Api $oApi
+   * @param null $sessionInterface Untyped to keep dependencies small. Should be equivalent to Symfony\Component\HttpFoundation\Session\SessionInterface
+   */
+  public function __construct(Api $oApi, $sessionInterface = null)
   {
     $this->oApi = $oApi;
+    $this->sessionInterface = $sessionInterface;
   }
 
   /**
@@ -84,6 +95,28 @@ abstract class ApiResourceBase
     return call_user_func([$this, $method]);
   }
 
+  protected function getSessionValue($key) {
+    if ($this->sessionInterface) {
+      return $this->sessionInterface->get($key);
+    }
+    return $_SESSION[$key];
+  }
+
+  protected function setSessionValue($key, $value) {
+    if ($this->sessionInterface) {
+      $this->sessionInterface->set($key, $value);
+      return;
+    }
+    $_SESSION[$key] = $value;
+  }
+
+  protected function hasSessionValue($key) {
+    if ($this->sessionInterface) {
+      return $this->sessionInterface->has($key);
+    }
+    return isset($_SESSION[$key]);
+  }
+
   protected function fillRequiredParams()
   {
     $fail = false;
@@ -98,8 +131,8 @@ abstract class ApiResourceBase
         }
       }
       if (!empty($value['session'])) {
-        if (isset($_SESSION[$value['session']])) {
-          $this->paramValues[$param] = $_SESSION[$value['session']];
+        if ($this->hasSessionValue($value['session'])) {
+          $this->paramValues[$param] = $this->getSessionValue($value['session']);
         }
       } else {
         $this->paramValues[$param] = $this->oApi->getParam($param, $value['type']);
