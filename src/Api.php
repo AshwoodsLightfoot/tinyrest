@@ -242,6 +242,28 @@ class Api {
     return $result;
   }
 
+  public function getSessionValue($key) {
+    if ($session = $this->getConfig()->getSessionInterface()) {
+      return $session->get($key);
+    }
+    return $_SESSION[$key];
+  }
+
+  public function setSessionValue($key, $value) {
+    if ($session = $this->getConfig()->getSessionInterface()) {
+      $session->set($key, $value);
+      return;
+    }
+    $_SESSION[$key] = $value;
+  }
+
+  public function hasSessionValue($key) {
+    if ($session = $this->getConfig()->getSessionInterface()) {
+      return $session->has($key);
+    }
+    return isset($_SESSION[$key]);
+  }
+
   /**
    * Getter for an object of config
    * @return ApiConfig
